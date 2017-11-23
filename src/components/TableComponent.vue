@@ -36,6 +36,7 @@
                         :key="row.vueTableComponentInternalRowId"
                         :row="row"
                         :columns="columns"
+						:class="fullTableRowClass(row)"
 						@rowClick="emitRowClick"
                 ></table-row>
                 </tbody>
@@ -90,6 +91,7 @@
             tableClass: { default: () => settings.tableClass },
             theadClass: { default: () => settings.theadClass },
             tbodyClass: { default: () => settings.tbodyClass },
+            rowClass:  { default: () => settings.rowClass },
             filterInputClass: { default: () => settings.filterInputClass },
             filterPlaceholder: { default: () => settings.filterPlaceholder },
             filterNoResults: { default: () => settings.filterNoResults },
@@ -315,9 +317,13 @@
             },
 
 			emitRowClick(row) {
-				this.$emit('rowClick', row);
 				this.$emit('row-click', row);
-			}
-        },
+			},
+
+            fullTableRowClass(row) {
+				const classResult = typeof this.rowClass === 'function' ? `${this.rowClass(row)}` : this.rowClass
+                return classList('table-component__table__body__row', classResult);
+            },
+		},
     };
 </script>
