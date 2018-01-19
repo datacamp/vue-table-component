@@ -654,6 +654,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         tableClass: '',
         theadClass: '',
         tbodyClass: '',
+        rowClass: '',
         headerClass: '',
         cellClass: '',
         filterInputClass: '',
@@ -1661,6 +1662,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             tableClass: { default: _settings2.default.tableClass },
             theadClass: { default: _settings2.default.theadClass },
             tbodyClass: { default: _settings2.default.tbodyClass },
+            rowClass: { default: _settings2.default.rowClass },
             filterInputClass: { default: _settings2.default.filterInputClass },
             filterPlaceholder: { default: _settings2.default.filterPlaceholder },
             filterNoResults: { default: _settings2.default.filterNoResults }
@@ -2004,6 +2006,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             emitRowClick: function emitRowClick(row) {
                 this.$emit('rowClick', row);
+            },
+            fullTableRowClass: function fullTableRowClass(row) {
+                var classResult = typeof this.rowClass === 'function' ? '' + this.rowClass(row) : this.rowClass;
+                return (0, _helpers.classList)('table-component__table__body__row', classResult);
             }
         }
     };
@@ -4916,6 +4922,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, _vm._l((_vm.displayedRows), function(row) {
     return _c('table-row', {
       key: row.vueTableComponentInternalRowId,
+      class: _vm.fullTableRowClass(row),
       attrs: {
         "row": row,
         "columns": _vm.columns
