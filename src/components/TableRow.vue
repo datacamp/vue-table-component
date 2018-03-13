@@ -5,6 +5,7 @@
             :row="row"
             :column="column"
             :key="column.id"
+            :addCellHeaderDataAttr="addCellHeaderDataAttr"
         ></table-cell>
     </tr>
 </template>
@@ -13,7 +14,7 @@
     import TableCell from './TableCell';
 
     export default {
-        props: ['columns', 'row'],
+        props: ['columns', 'row', 'addCellHeaderDataAttr'],
 
         components: {
             TableCell,

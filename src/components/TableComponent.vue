@@ -37,6 +37,7 @@
                         :row="row"
                         :columns="columns"
 						:class="fullTableRowClass(row)"
+                        :addCellHeaderDataAttr="addCellHeaderDataAttr"
 						@rowClick="emitRowClick"
                 ></table-row>
                 </tbody>
@@ -95,6 +96,8 @@
             filterInputClass: { default: settings.filterInputClass },
             filterPlaceholder: { default: settings.filterPlaceholder },
             filterNoResults: { default: settings.filterNoResults },
+
+            addCellHeaderDataAttr: { default: false },
         },
 
         data: () => ({
@@ -321,7 +324,7 @@
 			},
 
             fullTableRowClass(row) {
-				const classResult = typeof this.rowClass === 'function' ? `${this.rowClass(row)}` : this.rowClass
+                const classResult = typeof this.rowClass === 'function' ? `${this.rowClass(row)}` : this.rowClass
                 return classList('table-component__table__body__row', classResult);
             },
 		},
