@@ -8,6 +8,7 @@ const settings = {
     filterInputClass: '',
     filterPlaceholder: 'Filter table…',
     filterNoResults: 'There are no matching rows',
+    addCellHeaderDataAttr: false,
 };
 
 export function mergeSettings(newSettings) {

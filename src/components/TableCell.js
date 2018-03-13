@@ -1,13 +1,18 @@
 export default {
     functional: true,
 
-    props: ['column', 'row'],
+    props: ['column', 'row', 'addCellHeaderDataAttr'],
 
     render(createElement, { props }) {
         const data = {};
 
         if (props.column.cellClass) {
             data.class = props.column.cellClass;
+        }
+
+        if (props.addCellHeaderDataAttr) {
+            data.attrs = {};
+            data.attrs['data-header'] = props.column.label;
         }
 
         if (props.column.template) {
