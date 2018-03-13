@@ -9,6 +9,8 @@
         v-if="this.isVisible"
     >
         {{ label }}
+        {{ this.column.header }}
+
     </th>
 </template>
 
