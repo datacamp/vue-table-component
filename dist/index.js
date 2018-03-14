@@ -659,7 +659,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         cellClass: '',
         filterInputClass: '',
         filterPlaceholder: 'Filter table…',
-        filterNoResults: 'There are no matching rows'
+        filterNoResults: 'There are no matching rows',
+        addCellHeaderDataAttr: false
     };
 
     function mergeSettings(newSettings) {
@@ -1652,6 +1653,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
             showFilter: { default: true },
             showCaption: { default: true },
+            showSelectAll: { default: true },
 
             sortBy: { default: '', type: String },
             sortOrder: { default: '', type: String },
@@ -1665,7 +1667,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             rowClass: { default: _settings2.default.rowClass },
             filterInputClass: { default: _settings2.default.filterInputClass },
             filterPlaceholder: { default: _settings2.default.filterPlaceholder },
-            filterNoResults: { default: _settings2.default.filterNoResults }
+            filterNoResults: { default: _settings2.default.filterNoResults },
+
+            addCellHeaderDataAttr: { default: false }
         },
 
         data: function data() {
@@ -2050,7 +2054,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }
 
     exports.default = {
-        props: ['columns', 'row'],
+        props: ['columns', 'row', 'addCellHeaderDataAttr'],
 
         components: {
             TableCell: _TableCell2.default
@@ -2322,7 +2326,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     exports.default = {
         functional: true,
 
-        props: ['column', 'row'],
+        props: ['column', 'row', 'addCellHeaderDataAttr'],
 
         render: function render(createElement, _ref) {
             var props = _ref.props;
@@ -2331,6 +2335,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
             if (props.column.cellClass) {
                 data.class = props.column.cellClass;
+            }
+
+            if (props.addCellHeaderDataAttr) {
+                data.attrs = {};
+                data.attrs['data-header'] = props.column.label;
             }
 
             if (props.column.template) {
@@ -4822,15 +4831,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.$emit('rowClick', _vm.row)
       }
     }
-  }, _vm._l((_vm.visibleColumns), function(column) {
+  }, [_vm._t("default"), _vm._v(" "), _vm._l((_vm.visibleColumns), function(column) {
     return _c('table-cell', {
       key: column.id,
       attrs: {
         "row": _vm.row,
-        "column": column
+        "column": column,
+        "addCellHeaderDataAttr": _vm.addCellHeaderDataAttr
       }
     })
-  }))
+  })], 2)
 },staticRenderFns: []}
 
 /***/ }),
@@ -4906,7 +4916,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("\n                    " + _vm._s(_vm.ariaCaption) + "\n                ")]) : _vm._e(), _vm._v(" "), _c('thead', {
     class: _vm.fullTableHeadClass
-  }, [_c('tr', _vm._l((_vm.columns), function(column) {
+  }, [_c('tr', [(_vm.showSelectAll) ? _vm._t("selectAllHeader") : _vm._e(), _vm._v(" "), _vm._l((_vm.columns), function(column) {
     return _c('table-column-header', {
       key: column.show,
       attrs: {
@@ -4917,7 +4927,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "click": _vm.changeSorting
       }
     })
-  }))]), _vm._v(" "), _c('tbody', {
+  })], 2)]), _vm._v(" "), _c('tbody', {
     class: _vm.fullTableBodyClass
   }, _vm._l((_vm.displayedRows), function(row) {
     return _c('table-row', {
@@ -4925,12 +4935,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       class: _vm.fullTableRowClass(row),
       attrs: {
         "row": row,
-        "columns": _vm.columns
+        "columns": _vm.columns,
+        "addCellHeaderDataAttr": _vm.addCellHeaderDataAttr
       },
       on: {
         "rowClick": _vm.emitRowClick
       }
-    })
+    }, [_vm._t("selectAllRow", null, {
+      data: row.data
+    })], 2)
   })), _vm._v(" "), _c('tfoot', [_vm._t("tfoot", null, {
     rows: _vm.rows
   })], 2)])]), _vm._v(" "), (_vm.displayedRows.length === 0) ? _c('div', {

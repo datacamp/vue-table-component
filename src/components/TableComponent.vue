@@ -21,6 +21,7 @@
                 </caption>
                 <thead :class="fullTableHeadClass">
                 <tr>
+                    <slot v-if="showSelectAll" name="selectAllHeader"></slot>
                     <table-column-header
                             @click="changeSorting"
                             v-for="column in columns"
@@ -39,7 +40,9 @@
 						:class="fullTableRowClass(row)"
                         :addCellHeaderDataAttr="addCellHeaderDataAttr"
 						@rowClick="emitRowClick"
-                ></table-row>
+                >
+                    <slot :data="row.data" name="selectAllRow"></slot>
+                </table-row>
                 </tbody>
                 <tfoot>
                     <slot name="tfoot" :rows="rows"></slot>
@@ -82,6 +85,7 @@
 
             showFilter: { default: true },
             showCaption: { default: true },
+            showSelectAll: { default: true },
 
             sortBy: { default: '', type: String },
             sortOrder: { default: '', type: String },
