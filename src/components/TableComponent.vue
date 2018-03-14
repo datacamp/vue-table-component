@@ -21,6 +21,7 @@
                 </caption>
                 <thead :class="fullTableHeadClass">
                 <tr>
+                    <slot v-if="showSelectAll" name="selectAllHeader"></slot>
                     <table-column-header
                             @click="changeSorting"
                             v-for="column in columns"
@@ -37,8 +38,11 @@
                         :row="row"
                         :columns="columns"
 						:class="fullTableRowClass(row)"
+                        :addCellHeaderDataAttr="addCellHeaderDataAttr"
 						@rowClick="emitRowClick"
-                ></table-row>
+                >
+                    <slot :data="row.data" name="selectAllRow"></slot>
+                </table-row>
                 </tbody>
                 <tfoot>
                     <slot name="tfoot" :rows="rows"></slot>
@@ -81,6 +85,7 @@
 
             showFilter: { default: true },
             showCaption: { default: true },
+            showSelectAll: { default: true },
 
             sortBy: { default: '', type: String },
             sortOrder: { default: '', type: String },
@@ -95,6 +100,8 @@
             filterInputClass: { default: settings.filterInputClass },
             filterPlaceholder: { default: settings.filterPlaceholder },
             filterNoResults: { default: settings.filterNoResults },
+
+            addCellHeaderDataAttr: { default: false },
         },
 
         data: () => ({
@@ -321,7 +328,7 @@
 			},
 
             fullTableRowClass(row) {
-				const classResult = typeof this.rowClass === 'function' ? `${this.rowClass(row)}` : this.rowClass
+                const classResult = typeof this.rowClass === 'function' ? `${this.rowClass(row)}` : this.rowClass
                 return classList('table-component__table__body__row', classResult);
             },
 		},

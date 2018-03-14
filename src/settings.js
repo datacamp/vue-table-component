@@ -7,7 +7,7 @@ const settings = {
     cellClass: '',
     filterInputClass: '',
     filterPlaceholder: 'Filter table…',
-    filterNoResults: 'There are no matching rows',
+    filterNoResults: 'There are no matching rows'
 };
 
 export function mergeSettings(newSettings) {
