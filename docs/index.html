@@ -140,7 +140,6 @@
             ]"
             sort-by="songs"
             sort-order="asc"
-            add-cell-header-data-attr="true"
             >
             <table-column show="firstName" label="First name"></table-column>
             <table-column show="lastName" label="Last name"></table-column>
@@ -148,7 +147,6 @@
             <table-column show="songs" label="Songs" data-type="numeric"></table-column>
             <table-column show="birthday" label="Birthday" data-type="date:DD/MM/YYYY"></table-column>
             <table-column :sortable="false" :filterable="false">
-                <template slot="header">HELLOWORLD</template>
                 <template slot-scope="artist">
                     <a :href="'#' + artist.firstName.toLowerCase()">
                         Edit

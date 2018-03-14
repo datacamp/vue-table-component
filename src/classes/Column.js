@@ -11,7 +11,6 @@ export default class Column {
             this[property] = columnComponent[property];
         }
 
-        this.header = columnComponent.$slots.header;
         this.template = columnComponent.$scopedSlots.default;
     }
 
