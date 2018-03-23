@@ -1,4 +1,5 @@
 const settings = {
+    wrapperClass: '',
     tableClass: '',
     theadClass: '',
     tbodyClass: '',

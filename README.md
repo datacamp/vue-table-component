@@ -110,6 +110,7 @@ You can pass these props to `table-component`:
 - `sort-order`: the initial sort order.
 - `cache-lifetime`: the lifetime in minutes the component will cache the filter and sorting.
 - `cache-id`: if you use multiple instances of `table-component` on the same page you must set this to a unique value per instance.
+- `wrapper-class`: the passed value will be added to the `class` attribute of the rendered wrapper div
 - `table-class`: the passed value will be added to the `class` attribute of the rendered table
 - `thead-class`: the passed value will be added to the `class` attribute of the rendered table head.
 - `tbody-class`: the passed value will be added to the `class` attribute of the rendered table body.
