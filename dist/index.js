@@ -651,6 +651,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     });
     exports.mergeSettings = mergeSettings;
     var settings = {
+        wrapperClass: '',
         tableClass: '',
         theadClass: '',
         tbodyClass: '',
@@ -659,8 +660,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         cellClass: '',
         filterInputClass: '',
         filterPlaceholder: 'Filter table…',
-        filterNoResults: 'There are no matching rows',
-        addCellHeaderDataAttr: false
+        filterNoResults: 'There are no matching rows'
     };
 
     function mergeSettings(newSettings) {
@@ -1661,6 +1661,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             cacheKey: { default: null },
             cacheLifetime: { default: 5 },
 
+            wrapperClass: { default: _settings2.default.wrapperClass },
             tableClass: { default: _settings2.default.tableClass },
             theadClass: { default: _settings2.default.theadClass },
             tbodyClass: { default: _settings2.default.tbodyClass },
@@ -1758,6 +1759,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         },
 
         computed: {
+            fullWrapperClass: function fullWrapperClass() {
+                return (0, _helpers.classList)('table-component__table-wrapper', this.wrapperClass);
+            },
             fullTableClass: function fullTableClass() {
                 return (0, _helpers.classList)('table-component__table', this.tableClass);
             },
@@ -4905,7 +4909,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }
   }, [_vm._v("×")]) : _vm._e()]) : _vm._e(), _vm._v(" "), _c('div', {
-    staticClass: "table-component__table-wrapper"
+    class: _vm.fullWrapperClass
   }, [_c('table', {
     class: _vm.fullTableClass
   }, [(_vm.showCaption) ? _c('caption', {

@@ -14,7 +14,7 @@
             >×</a>
         </div>
 
-        <div class="table-component__table-wrapper">
+        <div :class="fullWrapperClass">
             <table :class="fullTableClass">
                 <caption v-if="showCaption" class="table-component__table__caption" role="alert" aria-live="polite">
                     {{ ariaCaption }}
@@ -93,6 +93,7 @@
             cacheKey: { default: null },
             cacheLifetime: { default: 5 },
 
+            wrapperClass: { default: () => settings.wrapperClass },
             tableClass: { default: () => settings.tableClass },
             theadClass: { default: () => settings.theadClass },
             tbodyClass: { default: () => settings.tbodyClass },
@@ -162,6 +163,10 @@
         },
 
         computed: {
+            fullWrapperClass() {
+                return classList('table-component__table-wrapper', this.wrapperClass);
+            },
+
             fullTableClass() {
                 return classList('table-component__table', this.tableClass);
             },

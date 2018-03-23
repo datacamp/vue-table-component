@@ -1,4 +1,5 @@
 const settings = {
+    wrapperClass: '',
     tableClass: '',
     theadClass: '',
     tbodyClass: '',
@@ -7,7 +8,8 @@ const settings = {
     cellClass: '',
     filterInputClass: '',
     filterPlaceholder: 'Filter table…',
-    filterNoResults: 'There are no matching rows'
+    filterNoResults: 'There are no matching rows',
+    addCellHeaderDataAttr: false
 };
 
 export function mergeSettings(newSettings) {

@@ -4,11 +4,13 @@ import settings from '../../src/settings';
 describe('settings', () => {
     it('can update settings', () => {
         TableComponent.settings({
+            wrapperClass: 'wrapper',
             tableClass: 'table',
             theadClass: 'table-head',
             tbodyClass: 'table-body',
         });
 
+        expect(settings.wrapperClass).toBe('wrapper');
         expect(settings.tableClass).toBe('table');
         expect(settings.theadClass).toBe('table-head');
         expect(settings.tbodyClass).toBe('table-body');
