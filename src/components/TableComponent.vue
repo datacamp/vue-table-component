@@ -39,6 +39,8 @@
                         :columns="columns"
 						:class="fullTableRowClass(row)"
                         :addCellHeaderDataAttr="addCellHeaderDataAttr"
+                        :rowSnowplowId="rowSnowplowId"
+                        :rowSnowplowUrl="rowSnowplowUrl"
 						@rowClick="emitRowClick"
                 >
                     <slot :data="row.data" name="selectAllRow"></slot>
@@ -102,6 +104,8 @@
             filterPlaceholder: { default: () => settings.filterPlaceholder },
             filterNoResults: { default: () => settings.filterNoResults },
             addCellHeaderDataAttr: { default: () => settings.addCellHeaderDataAttr },
+            rowSnowplowId: { default: () => settings.rowSnowplowId },
+            rowSnowplowUrl: { default: () => settings.rowSnowplowUrl },
         },
 
         data: () => ({

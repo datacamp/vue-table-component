@@ -661,7 +661,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         filterInputClass: '',
         filterPlaceholder: 'Filter table…',
         filterNoResults: 'There are no matching rows',
-        addCellHeaderDataAttr: false
+        addCellHeaderDataAttr: false,
+        rowSnowplowId: false,
+        rowSnowplowUrl: false
     };
 
     function mergeSettings(newSettings) {
@@ -1717,6 +1719,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                 } },
             addCellHeaderDataAttr: { default: function _default() {
                     return _settings2.default.addCellHeaderDataAttr;
+                } },
+            rowSnowplowId: { default: function _default() {
+                    return _settings2.default.rowSnowplowId;
+                } },
+            rowSnowplowUrl: { default: function _default() {
+                    return _settings2.default.rowSnowplowUrl;
                 } }
         },
 
@@ -2106,7 +2114,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }
 
     exports.default = {
-        props: ['columns', 'row', 'addCellHeaderDataAttr'],
+        props: ['columns', 'row', 'addCellHeaderDataAttr', 'rowSnowplowId', 'rowSnowplowUrl'],
 
         components: {
             TableCell: _TableCell2.default
@@ -2117,6 +2125,31 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                 return this.columns.filter(function (column) {
                     return !column.hidden;
                 });
+            }
+        },
+
+        methods: {
+            snowplowId: function snowplowId(_ref) {
+                var data = _ref.data;
+
+                if (typeof this.rowSnowplowId === 'function') {
+                    return this.rowSnowplowId(data);
+                } else if (typeof this.rowSnowplowId === 'string') {
+                    return this.rowSnowplowId;
+                } else {
+                    return false;
+                }
+            },
+            snowplowUrl: function snowplowUrl(_ref2) {
+                var data = _ref2.data;
+
+                if (typeof this.rowSnowplowUrl === 'function') {
+                    return this.rowSnowplowUrl(data);
+                } else if (typeof this.rowSnowplowUrl === 'string') {
+                    return this.rowSnowplowUrl;
+                } else {
+                    return false;
+                }
             }
         }
     };
@@ -4882,6 +4915,10 @@ module.exports = Component.exports
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('tr', {
+    attrs: {
+      "data-snowplow": _vm.snowplowId(_vm.row),
+      "data-snowplow-url": _vm.snowplowUrl(_vm.row)
+    },
     on: {
       "click": function($event) {
         _vm.$emit('rowClick', _vm.row)
@@ -5047,7 +5084,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       attrs: {
         "row": row,
         "columns": _vm.columns,
-        "addCellHeaderDataAttr": _vm.addCellHeaderDataAttr
+        "addCellHeaderDataAttr": _vm.addCellHeaderDataAttr,
+        "rowSnowplowId": _vm.rowSnowplowId,
+        "rowSnowplowUrl": _vm.rowSnowplowUrl
       },
       on: {
         "rowClick": _vm.emitRowClick

@@ -9,7 +9,9 @@ const settings = {
     filterInputClass: '',
     filterPlaceholder: 'Filter table…',
     filterNoResults: 'There are no matching rows',
-    addCellHeaderDataAttr: false
+    addCellHeaderDataAttr: false,
+    rowSnowplowId: false,
+    rowSnowplowUrl: false
 };
 
 export function mergeSettings(newSettings) {
